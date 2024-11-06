@@ -1,0 +1,5 @@
+﻿  game.cpp
+E:\Users\Riley\Documents\GitHub\GameOLife\GameOLife\game.cpp(71,12): error C2065: 'CountNeighbors': undeclared identifier
+E:\Users\Riley\Documents\GitHub\GameOLife\GameOLife\game.cpp(71,28): error C2050: switch expression not integral
+  Grid.cpp
+  Generating Code...
