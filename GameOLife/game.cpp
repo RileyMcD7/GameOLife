@@ -1,5 +1,5 @@
 #include "game.h"
-#
+#include <iostream>
 
 Game::Game() {
 	grid = Grid();  //initialize a grid instance
@@ -59,8 +59,8 @@ void Game::Reset() {
 
 void Game::Generate()   //actually move to grid if we are keeping info 
 {
-	for (int row = 0; row < numrows; row++) {
-		for (int column = 0; column < numcols; column++) {
+	for (int Genrow = 0; Genrow < numrows; Genrow++) {
+		for (int Gencolumn = 0; Gencolumn < numcols; Gencolumn++) {
 			/*
 			conditions:
 			if =1 and CountNeighbors = 1 then =0
@@ -68,20 +68,21 @@ void Game::Generate()   //actually move to grid if we are keeping info
 			if =1 and CountNeighbors = 4, then =0
 			if =0 and CountNeighbors = 3, then =1
 			*/
-			switch (CountNeighbors(row,column)) {  //define thise still
+			switch (CountNeighbors(Genrow, Gencolumn)) {  //define thise still
 			case 1:
-				grid.CurrentGrid[row][column] = 0;
+				grid.CurrentGrid[Genrow][Gencolumn] = 0;
+				break;
 			case 3:
-				grid.CurrentGrid[row][column] = 1;
+				grid.CurrentGrid[Genrow][Gencolumn] = 1;
 				break;
 			case 4:
-				grid.CurrentGrid[row][column] = 0;
+				grid.CurrentGrid[Genrow][Gencolumn] = 0;
 				break;
 			default:
 				break;
 			}
 
-			//probably need grid.PastGrid = grid.CurrentGrid;
+			grid.CurrentToPast();
 		}
 	}
 }
@@ -90,12 +91,74 @@ int Game::CountNeighbors(int row,int column)
 {
 	
 	int sum = 0;
-	sum = sum + grid.PastGrid[row-1][column];  //need edge cases. Can do with if statements here or by creating a bool method in grid and call it here. That is probably smarter
-	sum = sum + grid.PastGrid[row][column-1];
-	sum = sum + grid.PastGrid[row][column+1];
-	sum = sum + grid.PastGrid[row+1][column];
-	return sum;
+
+	if (grid.NotRightEdge(column)) {
+		sum = sum + grid.PastGrid[row][column + 1];
+		sum = sum + grid.PastGrid[row - 1][column + 1];
+		sum = sum + grid.PastGrid[row + 1][column + 1];
+		//std::cout << grid.PastGrid[row][column + 1];
+	}
+	if (grid.NotLeftEdge(column)) {
+		sum = sum + grid.PastGrid[row][column - 1];
+		sum = sum + grid.PastGrid[row - 1][column - 1];
+		sum = sum + grid.PastGrid[row + 1][column - 1];
+	}
+	if (grid.NotTopEdge(row)) {
+		sum = sum + grid.PastGrid[row - 1][column];
+		sum = sum + grid.PastGrid[row - 1][column - 1];
+		sum = sum + grid.PastGrid[row - 1][column + 1];
+	}
+	if (grid.NotBottomEdge(row)) {
+		sum = sum + grid.PastGrid[row + 1][column];
+		sum = sum + grid.PastGrid[row + 1][column - 1];
+		sum = sum + grid.PastGrid[row + 1][column + 1];
+		//std::cout << sum;
+	}
+	  //need edge cases. Can do with if statements here or by creating a bool method in grid and call it here. That is probably smarter
+
+	/*
+	how chat gpt does it:  //might be more beneficial to pass in PastGrid, so we don't access it externally every time. If speed issues persist, try that. Will need to reinvent grids though
+	// Function to count neighbors around a specific cell
+	int countNeighbors(const std::vector<std::vector<int>>& grid, int x, int y) {
+		int count = 0;
+		for (int i = -1; i <= 1; ++i) {
+			for (int j = -1; j <= 1; ++j) {
+				if (i == 0 && j == 0) continue;  // Skip the cell itself
+				int ni = x + i;
+				int nj = y + j;
+				if (ni >= 0 && ni < HEIGHT && nj >= 0 && nj < WIDTH) {
+					count += grid[ni][nj];
+				}
+			}
+		}
+		return count;
+	}
 	
+	*/
+	
+	return sum;
+
+}
+
+void Game::TestCase()
+{
+	grid.CurrentGrid[10][6] = 1;
+	grid.CurrentGrid[10][4] = 1;
+	grid.CurrentGrid[9][5] = 1;
+	grid.CurrentGrid[8][6] = 1;
+	grid.CurrentGrid[8][4] = 1;
+	grid.CurrentGrid[11][5] = 1;
+	grid.PastGrid[10][6] = 1;
+	grid.PastGrid[10][4] = 1;
+	grid.PastGrid[9][5] = 1;
+	grid.PastGrid[8][6] = 1;
+	grid.PastGrid[8][4] = 1;
+	grid.PastGrid[11][5] = 1;
+}
+
+void Game::GameClearCurrentGrid()
+{
+	grid.ClearCurrentGrid();
 }
 
 bool Game::IsLifeOutside()

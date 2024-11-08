@@ -1,6 +1,8 @@
 // GameOLife.cpp : This file contains the 'main' function. Program execution begins and ends there.
 // 
 // next steps 11/5/24: define mouse input, get edge cases of generate() countNeighbors(), put on github
+// 
+// //added to github, order is wrong in flow here. Map out from test case through generation
 //
 
 #include <iostream>
@@ -32,9 +34,13 @@ int main()
 
     InitWindow(500, 620, "Riley's Original Game Tetris");
     // computer graphics coordinate system starts at top left of a window
-    SetTargetFPS(60);
+    SetTargetFPS(20);
+
+    
 
     Game game = Game();  //need to define
+    game.TestCase();
+
     while (WindowShouldClose() == false) {
 
         game.HandleInput();
@@ -56,11 +62,16 @@ int main()
 
         game.Draw();
 
-        if (EventTriggered(0.2))
+        if (EventTriggered(1))
         {
+            //game.Draw();
             game.Generate();
+            //game.GameClearCurrentGrid();  need to iron out the flow again. 
         }
+        
 
+        //game.Draw();
+        
         EndDrawing();  //understand better when this happens and general timing of this system
     }
 

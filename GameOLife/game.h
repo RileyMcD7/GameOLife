@@ -13,13 +13,15 @@ public:
 	bool gameOver;
 	int numcols;  //I added these
 	int numrows;
+	void TestCase();
+	void GameClearCurrentGrid();
 
 private:
 	bool IsLifeOutside();
-	bool LifeAbove;
-	bool LifeLeft;
-	bool LifeRight;
-	bool LifeBelow;
+	//bool LifeAbove;
+	//bool LifeLeft;
+	//bool LifeRight;
+	//bool LifeBelow;
 	Grid grid;
 
 };

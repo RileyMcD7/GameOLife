@@ -1,5 +1,4 @@
-﻿  game.cpp
-E:\Users\Riley\Documents\GitHub\GameOLife\GameOLife\game.cpp(71,12): error C2065: 'CountNeighbors': undeclared identifier
-E:\Users\Riley\Documents\GitHub\GameOLife\GameOLife\game.cpp(71,28): error C2050: switch expression not integral
-  Grid.cpp
-  Generating Code...
+﻿  GameOLife.cpp
+  GameOLife.vcxproj -> E:\Users\Riley\Documents\GitHub\GameOLife\x64\Debug\GameOLife.exe
+  'pwsh.exe' is not recognized as an internal or external command,
+  operable program or batch file.
