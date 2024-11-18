@@ -4,7 +4,7 @@
 class Game {
 public:
 	Game();
-	~Game();
+	//~Game();
 	void Draw();
 	void HandleInput();
 	void Reset();

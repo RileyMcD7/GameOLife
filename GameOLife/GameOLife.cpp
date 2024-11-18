@@ -32,14 +32,32 @@ int main()
     const int screenWidth = 300;
     const int screenHeight = 600;
 
-    InitWindow(500, 620, "Riley's Original Game Tetris");
+    const int FullWidth = 500;
+    const int FullHeight = 620;
+
+    InitWindow(FullWidth, FullHeight, "Riley's Original Game Tetris");
     // computer graphics coordinate system starts at top left of a window
-    SetTargetFPS(20);
+    SetTargetFPS(30);
 
     
 
     Game game = Game();  //need to define
+
+    game.Draw();
+
+    if (IsMouseButtonPressed(MOUSE_LEFT_BUTTON)) {
+        // Get mouse position when left button is clicked
+        Vector2 mousePosition = GetMousePosition();
+        //maybe cast to int? and enter those into matrix
+        game.Draw();
+    }
+
+
+    //create a GameStart() button and variable
+    
     game.TestCase();
+
+    // && GameStart() == true
 
     while (WindowShouldClose() == false) {
 
@@ -60,7 +78,7 @@ int main()
             //DrawTextEx(font, "GAME OVER", { 320,450 }, 24, 2, WHITE);
         }
 
-        game.Draw();
+         game.Draw();
 
         if (EventTriggered(1))
         {

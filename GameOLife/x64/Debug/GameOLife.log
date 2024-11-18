@@ -1,4 +1,8 @@
-﻿  GameOLife.cpp
+﻿  colors.cpp
+  game.cpp
+  GameOLife.cpp
+  Grid.cpp
+  Generating Code...
   GameOLife.vcxproj -> E:\Users\Riley\Documents\GitHub\GameOLife\x64\Debug\GameOLife.exe
   'pwsh.exe' is not recognized as an internal or external command,
   operable program or batch file.

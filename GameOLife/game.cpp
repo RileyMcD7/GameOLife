@@ -9,9 +9,11 @@ Game::Game() {
 
 }
 
+/*
 Game::~Game()
 {
 }
+*/
 
 void Game::Draw()
 {
@@ -118,6 +120,7 @@ int Game::CountNeighbors(int row,int column)
 
 	/*
 	how chat gpt does it:  //might be more beneficial to pass in PastGrid, so we don't access it externally every time. If speed issues persist, try that. Will need to reinvent grids though
+	//also would have been much simpler to define std::vector<std::vector<int>> CurrentGrid = {{},{}} assuming we could initialize with std::vector<std::vector<int>> grid(HEIGHT, std::vector<int>(WIDTH, 0));
 	// Function to count neighbors around a specific cell
 	int countNeighbors(const std::vector<std::vector<int>>& grid, int x, int y) {
 		int count = 0;
